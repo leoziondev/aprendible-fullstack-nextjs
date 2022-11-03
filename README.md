@@ -9,3 +9,4 @@ __Workshop by [Aprendible](https://aprendible.com)__
 - PNPM
 - Tailwindcss
 - Axios
+- Phosphor Icons
