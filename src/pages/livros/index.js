@@ -1,15 +1,36 @@
+import { useState } from "react"
 import Link from "next/link"
+import { api } from "../../lib/api"
+import { toast } from "react-toastify"
 
 import Layout from "../../components/Layout"
 import Container from "../../components/ui/Container"
 import Title from "../../components/Title"
 
-import { Book } from 'phosphor-react'
-import { api } from "../../lib/api"
-import { NotePencil } from "phosphor-react"
-import { Trash } from "phosphor-react"
+import { Book, NotePencil, Trash } from 'phosphor-react'
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Books = ({ books }) => {
+  const [allBooks, setAllBooks] = useState(books)
+
+  const handleDelete = async (e, bookId) => {
+    e.preventDefault()
+
+    try {
+
+      const res = await api.delete(`/api/books/${bookId}`)
+      const newAllBooks = allBooks.filter((book) => book.id !== bookId)
+
+      setAllBooks(newAllBooks)
+
+      toast.success("Livro deletado com sucesso")
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Layout>
       <Container className="flex items-center justify-between mb-4">
@@ -24,7 +45,7 @@ const Books = ({ books }) => {
       </Container>
       <Container>
         <ul>
-          {books.map((book) => {
+          {allBooks.map((book) => {
             return (
               <li key={book.id} className="flex items-center justify-between bg-slate-800 rounded-md py-2 px-4 mb-2">
                 <Link href={`/livros/${book.id}`} className="text-slate-500 hover:text-indigo-500">
@@ -34,6 +55,11 @@ const Books = ({ books }) => {
                   <Link href={`/livros/${book.id}/editar`} className="cursor-pointer text-slate-500 hover:text-indigo-400" title="Editar">
                     <NotePencil size={22} weight="duotone" />
                   </Link>
+                  <form onSubmit={(e) => handleDelete(e, book.id)}>
+                    <button type="submit" className="cursor-pointer text-slate-500 hover:text-red-500">
+                      <Trash size={22} weight="duotone" />
+                    </button>
+                  </form>
                 </div>
               </li>
             )
