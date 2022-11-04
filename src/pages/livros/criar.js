@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import { api } from "../../lib/api"
+import { toast } from "react-toastify"
 
 import Layout from "../../components/Layout"
 import Title from "../../components/Title"
@@ -23,10 +24,12 @@ const CreateBook = () => {
       const res = await api.post('/api/books', {
         title: bookName
       })
-
+      
       setBookName('')
       setError('')
       setIsSubmiting(false)
+
+      toast.success("Livro cadastrado com sucesso")
     } catch (error) {
       setIsSubmiting(false)
       setError(error.response.data.message)
