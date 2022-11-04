@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
     <div className="bg-slate-900 flex flex-col min-h-screen">
       <header>
         <Container className="relative">
-          <button onClick={handleBack} className="absolute top-10" title="Voltar">
+          <button onClick={handleBack} className="absolute top-10" title="Voltar" data-cy="back-router">
             <ArrowLeft size={18} className="text-white" />
           </button>
           <Link href="/" className="flex flex-col items-center justify-center pt-4 mb-8">

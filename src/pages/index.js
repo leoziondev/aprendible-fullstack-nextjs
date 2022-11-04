@@ -7,6 +7,7 @@ const Home = () => {
       <Logo sizeIcon={72} className="text-4xl mb-16" />
       <Link
         href="/livros"
+        data-cy="link-to-books"
         className="text-white text-sm tracking-wide bg-indigo-500 rounded-md py-2 px-4"
       >
         Acessar livros

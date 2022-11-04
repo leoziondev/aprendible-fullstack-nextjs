@@ -44,19 +44,32 @@ const Books = ({ books }) => {
         </Link>
       </Container>
       <Container>
-        <ul>
+        <ul data-cy="book-list">
           {allBooks.map((book) => {
             return (
               <li key={book.id} className="flex items-center justify-between bg-slate-800 rounded-md py-2 px-4 mb-2">
-                <Link href={`/livros/${book.id}`} className="text-slate-500 hover:text-indigo-500">
+                <Link
+                  href={`/livros/${book.id}`}
+                  data-cy={`link-to-visit-book-${book.id}`}
+                  className="text-slate-500 hover:text-indigo-500"
+                >
                   <h2>{book.title}</h2>
                 </Link>
                 <div className="flex gap-3">
-                  <Link href={`/livros/${book.id}/editar`} className="cursor-pointer text-slate-500 hover:text-indigo-400" title="Editar">
+                  <Link
+                    href={`/livros/${book.id}/editar`}
+                    data-cy={`link-to-edit-book-${book.id}`}
+                    className="cursor-pointer text-slate-500 hover:text-indigo-400"
+                    title="Editar"
+                  >
                     <NotePencil size={22} weight="duotone" />
                   </Link>
                   <form onSubmit={(e) => handleDelete(e, book.id)}>
-                    <button type="submit" className="cursor-pointer text-slate-500 hover:text-red-500">
+                    <button
+                      type="submit"
+                      data-cy={`link-to-delete-book-${book.id}`}
+                      className="cursor-pointer text-slate-500 hover:text-red-500"
+                    >
                       <Trash size={22} weight="duotone" />
                     </button>
                   </form>
